@@ -1,0 +1,119 @@
+
+<div class="diary-container">
+
+  <div class="diary-card">
+
+    <h1>Create Diary Entry</h1>
+
+    <p class="subtitle">
+      Capture your thoughts and memories.
+    </p>
+
+    @if (successMessage) {
+      <div class="success-message">
+        {{ successMessage }}
+      </div>
+    }
+
+    @if (errorMessage) {
+      <div class="error-message">
+        {{ errorMessage }}
+      </div>
+    }
+
+    <form
+      [formGroup]="diaryForm"
+      (ngSubmit)="createDiaryEntry()">
+
+      <!-- Title -->
+      <div class="form-group">
+
+        <label for="title">Diary Title</label>
+
+        <input
+          id="title"
+          type="text"
+          formControlName="title"
+          placeholder="Enter your diary title">
+
+        @if (
+          diaryForm.controls.title.touched &&
+          diaryForm.controls.title.hasError('required')
+        ) {
+          <small class="error-text">
+            Title is required.
+          </small>
+        }
+
+        @if (diaryForm.controls.title.hasError('maxlength')) {
+          <small class="error-text">
+            Title cannot exceed 150 characters.
+          </small>
+        }
+
+      </div>
+
+      <!-- Content -->
+      <div class="form-group">
+
+        <label for="content">Diary Content</label>
+
+        <textarea
+          id="content"
+          rows="7"
+          formControlName="content"
+          placeholder="Write about your day...">
+        </textarea>
+
+        @if (
+          diaryForm.controls.content.touched &&
+          diaryForm.controls.content.hasError('required')
+        ) {
+          <small class="error-text">
+            Content is required.
+          </small>
+        }
+
+        @if (diaryForm.controls.content.hasError('maxlength')) {
+          <small class="error-text">
+            Content cannot exceed 5000 characters.
+          </small>
+        }
+
+      </div>
+
+      <!-- Date -->
+      <div class="form-group">
+
+        <label for="entryDate">Entry Date</label>
+
+        <input
+          id="entryDate"
+          type="date"
+          formControlName="entryDate">
+
+        @if (
+          diaryForm.controls.entryDate.touched &&
+          diaryForm.controls.entryDate.hasError('required')
+        ) {
+          <small class="error-text">
+            Entry date is required.
+          </small>
+        }
+
+      </div>
+
+      <!-- Submit -->
+      <button
+        type="submit"
+        [disabled]="isSubmitting">
+
+        {{ isSubmitting ? 'Saving...' : 'Save Diary Entry' }}
+
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
