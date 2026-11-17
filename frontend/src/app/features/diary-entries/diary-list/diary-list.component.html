@@ -1,0 +1,46 @@
+
+<div class="diary-container">
+
+  <h1>My Diary Entries</h1>
+
+  <p class="subtitle">
+    All your saved memories in one place.
+  </p>
+
+  @if (isLoading()) {
+    <p>Loading diary entries...</p>
+  }
+
+  @if (errorMessage()) {
+    <p class="error-message">{{ errorMessage() }}</p>
+  }
+
+  @if (!isLoading() && !errorMessage() && diaryEntries().length === 0) {
+    <p>No diary entries found.</p>
+  }
+
+  @if (!isLoading() && diaryEntries().length > 0) {
+
+    <div class="diary-list">
+
+      @for (entry of diaryEntries(); track entry.diaryEntryId) {
+
+        <div class="diary-card">
+
+          <h2>{{ entry.title }}</h2>
+
+          <p class="entry-date">
+            {{ entry.entryDate | date:'dd MMMM yyyy' }}
+          </p>
+
+          <p class="entry-content">{{ entry.content }}</p>
+
+        </div>
+
+      }
+
+    </div>
+
+  }
+
+</div>

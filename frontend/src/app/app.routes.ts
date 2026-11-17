@@ -17,6 +17,14 @@ export const routes: Routes = [
   },
 
   {
+    path: 'diary-list',
+    loadComponent: () =>
+      import('./features/diary-entries/diary-list/diary-list.component')
+        .then(m => m.DiaryListComponent)
+  },
+
+
+  {
     path: '**',
     redirectTo: 'create-diary'
   }

@@ -26,4 +26,11 @@ export class DiaryEntryService {
       request
     );
   }
+
+  getDiaryEntries(): Observable<DiaryEntryResponse[]> {
+
+    return this.http.get<DiaryEntryResponse[]>(
+      this.apiUrl
+    );
+  }
 }
