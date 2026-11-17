@@ -36,4 +36,16 @@ public class DiaryEntryRepository : IDiaryEntryRepository
             .OrderByDescending(x => x.EntryDate)
             .ToListAsync(cancellationToken);
     }
+
+    // Read by ID
+    public async Task<DiaryEntry?> GetByIdAsync(
+        int diaryEntryId,
+        CancellationToken cancellationToken)
+    {
+        return await _context.DiaryEntries
+            .AsNoTracking()
+            .FirstOrDefaultAsync(
+                x => x.DiaryEntryId == diaryEntryId,
+                cancellationToken);
+    }
 }

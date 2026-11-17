@@ -40,4 +40,25 @@ public class DiaryEntriesController : ControllerBase
 
         return Ok(response);
     }
+
+    // GET: api/DiaryEntries/1
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<DiaryEntryResponse>> GetById(
+        int id,
+        CancellationToken cancellationToken)
+    {
+        var response = await _diaryEntryService.GetByIdAsync(
+            id,
+            cancellationToken);
+
+        if (response == null)
+        {
+            return NotFound(new
+            {
+                message = $"Diary entry with ID {id} was not found."
+            });
+        }
+
+        return Ok(response);
+    }
 }

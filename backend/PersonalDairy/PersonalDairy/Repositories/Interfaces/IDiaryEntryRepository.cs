@@ -11,4 +11,8 @@ public interface IDiaryEntryRepository
 
     Task<List<DiaryEntry>> GetAllAsync(
        CancellationToken cancellationToken);
+
+    Task<DiaryEntry?> GetByIdAsync(
+       int diaryEntryId,
+       CancellationToken cancellationToken);
 }

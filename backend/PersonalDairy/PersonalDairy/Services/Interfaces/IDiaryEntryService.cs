@@ -11,4 +11,8 @@ public interface IDiaryEntryService
 
     Task<List<DiaryEntryResponse>> GetAllAsync(
     CancellationToken cancellationToken);
+
+    Task<DiaryEntryResponse?> GetByIdAsync(
+        int diaryEntryId,
+        CancellationToken cancellationToken);
 }

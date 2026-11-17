@@ -72,4 +72,39 @@ public class DiaryEntryService : IDiaryEntryService
             EntryDate = entry.EntryDate
         }).ToList();
     }
+
+    // Read by ID
+    public async Task<DiaryEntryResponse?> GetByIdAsync(
+        int diaryEntryId,
+        CancellationToken cancellationToken)
+    {
+        if (diaryEntryId <= 0)
+        {
+            return null;
+        }
+
+        var diaryEntry = await _diaryEntryRepository.GetByIdAsync(
+            diaryEntryId,
+            cancellationToken);
+
+        if (diaryEntry == null)
+        {
+            return null;
+        }
+
+        return MapToResponse(diaryEntry);
+    }
+
+    // Entity to DTO mapping
+    private static DiaryEntryResponse MapToResponse(
+        DiaryEntry diaryEntry)
+    {
+        return new DiaryEntryResponse
+        {
+            DiaryEntryId = diaryEntry.DiaryEntryId,
+            Title = diaryEntry.Title,
+            Content = diaryEntry.Content,
+            EntryDate = diaryEntry.EntryDate
+        };
+    }
 }
