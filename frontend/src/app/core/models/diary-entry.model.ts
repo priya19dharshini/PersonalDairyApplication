@@ -11,3 +11,10 @@ export interface DiaryEntryResponse {
   content: string;
   entryDate: string;
 }
+
+
+export interface UpdateDiaryEntryRequest {
+  title: string;
+  content: string;
+  entryDate: string;
+}

@@ -7,43 +7,63 @@
     All your saved memories in one place.
   </p>
 
+  <!-- Loading State -->
   @if (isLoading()) {
     <p>Loading diary entries...</p>
   }
 
+  <!-- Error State -->
   @if (errorMessage()) {
-    <p class="error-message">{{ errorMessage() }}</p>
+    <p class="error-message">
+      {{ errorMessage() }}
+    </p>
   }
 
+  <!-- Empty State -->
   @if (!isLoading() && !errorMessage() && diaryEntries().length === 0) {
     <p>No diary entries found.</p>
   }
 
-  @if (!isLoading() && diaryEntries().length > 0) {
+  <!-- Diary Entries -->
+  @if (!isLoading() && !errorMessage() && diaryEntries().length > 0) {
 
     <div class="diary-list">
 
       @for (entry of diaryEntries(); track entry.diaryEntryId) {
 
-        <a
-          class="diary-card"
-          [routerLink]="['/diary-details', entry.diaryEntryId]">
+        <div class="diary-card">
 
+          <!-- Diary Title -->
           <h2>{{ entry.title }}</h2>
 
+          <!-- Entry Date -->
           <p class="entry-date">
             {{ entry.entryDate | date:'dd MMMM yyyy' }}
           </p>
 
+          <!-- Diary Content -->
           <p class="entry-content">
             {{ entry.content }}
           </p>
 
-          <span class="view-details">
-            View Details →
-          </span>
+          <!-- Action Buttons -->
+          <div class="card-actions">
 
-        </a>
+            <!-- View Details -->
+            <a
+              [routerLink]="['/diary-details', entry.diaryEntryId]">
+              View Details
+            </a>
+
+            <!-- Edit Entry -->
+            <a
+              [routerLink]="['/diary-edit', entry.diaryEntryId]">
+              Edit Entry
+            </a>
+
+          </div>
+
+        </div>
 
       }
 

@@ -23,3 +23,19 @@
   font-weight: 600;
   margin-top: 12px;
 }
+
+.card-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.card-actions a {
+  color: #4f46e5;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.card-actions a:hover {
+  text-decoration: underline;
+}

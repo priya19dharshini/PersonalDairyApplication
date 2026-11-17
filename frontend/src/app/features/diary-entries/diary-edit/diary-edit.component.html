@@ -1,0 +1,137 @@
+
+<div class="edit-container">
+
+  <div class="edit-card">
+
+    <a routerLink="/diary-list" class="back-link">
+      ← Back to Diary List
+    </a>
+
+    <h1>Edit Diary Entry</h1>
+
+    <p class="subtitle">
+      Update your memories and thoughts.
+    </p>
+
+    @if (isLoading()) {
+      <p>Loading diary entry...</p>
+    }
+
+    @if (successMessage()) {
+      <div class="success-message">
+        {{ successMessage() }}
+      </div>
+    }
+
+    @if (errorMessage()) {
+      <div class="error-message">
+        {{ errorMessage() }}
+      </div>
+    }
+
+    @if (!isLoading() && diaryEntryId > 0 && !errorMessage()) {
+
+      <form
+        [formGroup]="diaryForm"
+        (ngSubmit)="updateDiaryEntry()">
+
+        <!-- Title -->
+
+        <div class="form-group">
+
+          <label for="title">Diary Title</label>
+
+          <input
+            id="title"
+            type="text"
+            formControlName="title"
+            placeholder="Enter diary title">
+
+          @if (
+            diaryForm.controls.title.touched &&
+            diaryForm.controls.title.hasError('required')
+          ) {
+            <small>Title is required.</small>
+          }
+
+          @if (
+            diaryForm.controls.title.hasError('maxlength')
+          ) {
+            <small>Maximum 150 characters allowed.</small>
+          }
+
+        </div>
+
+        <!-- Content -->
+
+        <div class="form-group">
+
+          <label for="content">Diary Content</label>
+
+          <textarea
+            id="content"
+            rows="8"
+            formControlName="content"
+            placeholder="Write your thoughts...">
+          </textarea>
+
+          @if (
+            diaryForm.controls.content.touched &&
+            diaryForm.controls.content.hasError('required')
+          ) {
+            <small>Content is required.</small>
+          }
+
+          @if (
+            diaryForm.controls.content.hasError('maxlength')
+          ) {
+            <small>Maximum 5000 characters allowed.</small>
+          }
+
+        </div>
+
+        <!-- Date -->
+
+        <div class="form-group">
+
+          <label for="entryDate">Entry Date</label>
+
+          <input
+            id="entryDate"
+            type="date"
+            formControlName="entryDate">
+
+          @if (
+            diaryForm.controls.entryDate.touched &&
+            diaryForm.controls.entryDate.hasError('required')
+          ) {
+            <small>Entry date is required.</small>
+          }
+
+        </div>
+
+        <!-- Buttons -->
+
+        <div class="button-group">
+
+          <button
+            type="submit"
+            [disabled]="isSubmitting() || diaryForm.invalid">
+
+            {{ isSubmitting() ? 'Updating...' : 'Update Diary Entry' }}
+
+          </button>
+
+          <a routerLink="/diary-list" class="cancel-button">
+            Cancel
+          </a>
+
+        </div>
+
+      </form>
+
+    }
+
+  </div>
+
+</div>

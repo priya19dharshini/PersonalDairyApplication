@@ -30,6 +30,13 @@ export const routes: Routes = [
         .then(m => m.DiaryDetailsComponent)
   },
 
+  {
+    path: 'diary-edit/:id',
+    loadComponent: () =>
+      import('./features/diary-entries/diary-edit/diary-edit.component')
+        .then(m => m.DiaryEditComponent)
+  },
+
 
   {
     path: '**',
