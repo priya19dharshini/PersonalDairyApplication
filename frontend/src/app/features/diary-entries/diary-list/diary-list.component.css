@@ -1,50 +1,25 @@
 
-.diary-container {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 20px;
-}
-
-h1 {
-  text-align: center;
-  color: #333;
-}
-
-.subtitle {
-  text-align: center;
-  color: #777;
-  margin-bottom: 30px;
-}
-
-.diary-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
-
 .diary-card {
-  padding: 22px;
-  border: 1px solid #ddd;
-  border-radius: 12px;
+  display: block;
+  text-decoration: none;
+  color: inherit;
   background: white;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  padding: 25px;
+  margin-bottom: 20px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.diary-card h2 {
-  color: #333;
+.diary-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 }
 
-.entry-date {
-  color: #777;
-  font-size: 14px;
-}
-
-.entry-content {
-  color: #444;
-  line-height: 1.7;
-  white-space: pre-wrap;
-}
-
-.error-message {
-  color: red;
+.view-details {
+  display: inline-block;
+  color: #4f46e5;
+  font-weight: 600;
+  margin-top: 12px;
 }

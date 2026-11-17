@@ -1,0 +1,46 @@
+
+<div class="details-container">
+
+  <a routerLink="/diary-list" class="back-link">
+    ← Back to Diary List
+  </a>
+
+  <h1>Diary Details</h1>
+
+  @if (isLoading()) {
+    <p class="status-message">
+      Loading diary entry...
+    </p>
+  }
+
+  @if (errorMessage()) {
+    <div class="error-message">
+      {{ errorMessage() }}
+    </div>
+  }
+
+  @if (diaryEntry(); as entry) {
+
+    <div class="details-card">
+
+      <h2>{{ entry.title }}</h2>
+
+      <p class="entry-date">
+        {{ entry.entryDate | date:'dd MMMM yyyy' }}
+      </p>
+
+      <hr>
+
+      <div class="entry-content">
+        {{ entry.content }}
+      </div>
+
+      <div class="entry-footer">
+        <span>Diary Entry ID: {{ entry.diaryEntryId }}</span>
+      </div>
+
+    </div>
+
+  }
+
+</div>

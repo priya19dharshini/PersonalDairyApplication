@@ -2,6 +2,7 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
+import { RouterLink } from '@angular/router';
 
 import { DiaryEntryService } from '../../../core/services/diary-entry.service';
 import { DiaryEntryResponse } from '../../../core/models/diary-entry.model';
@@ -9,7 +10,7 @@ import { DiaryEntryResponse } from '../../../core/models/diary-entry.model';
 @Component({
   selector: 'app-diary-list',
   standalone: true,
-  imports: [DatePipe],
+  imports: [DatePipe,RouterLink],
   templateUrl: './diary-list.component.html',
   styleUrl: './diary-list.component.css'
 })

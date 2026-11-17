@@ -33,4 +33,14 @@ export class DiaryEntryService {
       this.apiUrl
     );
   }
+
+  // Get one diary entry by ID
+  getDiaryEntryById(
+    id: number
+  ): Observable<DiaryEntryResponse> {
+
+    return this.http.get<DiaryEntryResponse>(
+      `${this.apiUrl}/${id}`
+    );
+  }
 }

@@ -23,6 +23,13 @@ export const routes: Routes = [
         .then(m => m.DiaryListComponent)
   },
 
+  {
+    path: 'diary-details/:id',
+    loadComponent: () =>
+      import('./features/diary-entries/diary-details/diary-details.component')
+        .then(m => m.DiaryDetailsComponent)
+  },
+
 
   {
     path: '**',

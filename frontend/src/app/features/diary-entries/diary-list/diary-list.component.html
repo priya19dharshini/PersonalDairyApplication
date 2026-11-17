@@ -25,7 +25,9 @@
 
       @for (entry of diaryEntries(); track entry.diaryEntryId) {
 
-        <div class="diary-card">
+        <a
+          class="diary-card"
+          [routerLink]="['/diary-details', entry.diaryEntryId]">
 
           <h2>{{ entry.title }}</h2>
 
@@ -33,9 +35,15 @@
             {{ entry.entryDate | date:'dd MMMM yyyy' }}
           </p>
 
-          <p class="entry-content">{{ entry.content }}</p>
+          <p class="entry-content">
+            {{ entry.content }}
+          </p>
 
-        </div>
+          <span class="view-details">
+            View Details →
+          </span>
+
+        </a>
 
       }
 
