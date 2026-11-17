@@ -15,4 +15,8 @@ public interface IDiaryEntryRepository
     Task<DiaryEntry?> GetByIdAsync(
        int diaryEntryId,
        CancellationToken cancellationToken);
+
+    Task UpdateAsync(
+       DiaryEntry diaryEntry,
+       CancellationToken cancellationToken);
 }

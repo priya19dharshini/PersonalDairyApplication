@@ -95,6 +95,44 @@ public class DiaryEntryService : IDiaryEntryService
         return MapToResponse(diaryEntry);
     }
 
+    // UPDATE
+    public async Task<DiaryEntryResponse?> UpdateAsync(
+        int diaryEntryId,
+        UpdateDiaryEntryRequest request,
+        CancellationToken cancellationToken)
+    {
+        if (diaryEntryId <= 0)
+        {
+            return null;
+        }
+
+        // 1. Find existing diary entry
+        var diaryEntry = await _diaryEntryRepository.GetByIdAsync(
+            diaryEntryId,
+            cancellationToken);
+
+        // 2. Check whether it exists
+        if (diaryEntry == null)
+        {
+            return null;
+        }
+
+        // 3. Update existing properties
+        diaryEntry.Title = request.Title.Trim();
+
+        diaryEntry.Content = request.Content.Trim();
+
+        diaryEntry.EntryDate = request.EntryDate!.Value;
+
+        // 4. Save changes
+        await _diaryEntryRepository.UpdateAsync(
+            diaryEntry,
+            cancellationToken);
+
+        // 5. Return updated DTO
+        return MapToResponse(diaryEntry);
+    }
+
     // Entity to DTO mapping
     private static DiaryEntryResponse MapToResponse(
         DiaryEntry diaryEntry)

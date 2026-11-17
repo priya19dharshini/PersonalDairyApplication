@@ -47,5 +47,16 @@ public class DiaryEntryRepository : IDiaryEntryRepository
             .FirstOrDefaultAsync(
                 x => x.DiaryEntryId == diaryEntryId,
                 cancellationToken);
+
+    }
+
+    // UPDATE
+    public async Task UpdateAsync(
+        DiaryEntry diaryEntry,
+        CancellationToken cancellationToken)
+    {
+        _context.DiaryEntries.Update(diaryEntry);
+
+        await _context.SaveChangesAsync(cancellationToken);
     }
 }

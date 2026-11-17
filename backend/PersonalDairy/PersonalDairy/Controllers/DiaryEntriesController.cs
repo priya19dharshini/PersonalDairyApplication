@@ -61,4 +61,27 @@ public class DiaryEntriesController : ControllerBase
 
         return Ok(response);
     }
+
+    // PUT: api/DiaryEntries/1
+    [HttpPut("{id:int}")]
+    public async Task<ActionResult<DiaryEntryResponse>> Update(
+        int id,
+        [FromBody] UpdateDiaryEntryRequest request,
+        CancellationToken cancellationToken)
+    {
+        var response = await _diaryEntryService.UpdateAsync(
+            id,
+            request,
+            cancellationToken);
+
+        if (response == null)
+        {
+            return NotFound(new
+            {
+                message = $"Diary entry with ID {id} was not found."
+            });
+        }
+
+        return Ok(response);
+    }
 }
