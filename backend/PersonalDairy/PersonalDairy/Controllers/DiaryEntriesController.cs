@@ -30,4 +30,14 @@ public class DiaryEntriesController : ControllerBase
             StatusCodes.Status201Created,
             response);
     }
+
+    [HttpGet]
+    public async Task<ActionResult<List<DiaryEntryResponse>>> GetAll(
+       CancellationToken cancellationToken)
+    {
+        var response = await _diaryEntryService.GetAllAsync(
+            cancellationToken);
+
+        return Ok(response);
+    }
 }

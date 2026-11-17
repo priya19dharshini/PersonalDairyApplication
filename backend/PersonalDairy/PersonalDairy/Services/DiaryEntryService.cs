@@ -57,4 +57,19 @@ public class DiaryEntryService : IDiaryEntryService
 
         return response;
     }
+
+    public async Task<List<DiaryEntryResponse>> GetAllAsync(
+    CancellationToken cancellationToken)
+    {
+        var diaryEntries = await _diaryEntryRepository.GetAllAsync(
+            cancellationToken);
+
+        return diaryEntries.Select(entry => new DiaryEntryResponse
+        {
+            DiaryEntryId = entry.DiaryEntryId,
+            Title = entry.Title,
+            Content = entry.Content,
+            EntryDate = entry.EntryDate
+        }).ToList();
+    }
 }

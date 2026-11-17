@@ -8,4 +8,7 @@ public interface IDiaryEntryService
     Task<DiaryEntryResponse> CreateAsync(
         CreateDiaryEntryRequest request,
         CancellationToken cancellationToken);
+
+    Task<List<DiaryEntryResponse>> GetAllAsync(
+    CancellationToken cancellationToken);
 }

@@ -27,4 +27,13 @@ public class DiaryEntryRepository : IDiaryEntryRepository
 
         return diaryEntry;
     }
+
+    public async Task<List<DiaryEntry>> GetAllAsync(
+        CancellationToken cancellationToken)
+    {
+        return await _context.DiaryEntries
+            .AsNoTracking()
+            .OrderByDescending(x => x.EntryDate)
+            .ToListAsync(cancellationToken);
+    }
 }
