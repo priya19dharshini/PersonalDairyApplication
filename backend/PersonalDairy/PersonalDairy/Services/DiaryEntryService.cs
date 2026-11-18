@@ -145,4 +145,22 @@ public class DiaryEntryService : IDiaryEntryService
             EntryDate = diaryEntry.EntryDate
         };
     }
+
+
+    public async Task<bool> DeleteAsync(
+        int diaryEntryId,
+        CancellationToken cancellationToken)
+    {
+        // Validate ID
+        if (diaryEntryId <= 0)
+        {
+            return false;
+        }
+
+        // Delegate deletion to repository
+        return await _diaryEntryRepository.DeleteAsync(
+            diaryEntryId,
+            cancellationToken);
+    }
+
 }

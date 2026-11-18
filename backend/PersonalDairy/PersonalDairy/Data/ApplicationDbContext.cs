@@ -13,4 +13,5 @@ public class ApplicationDbContext : DbContext
     }
 
     public DbSet<DiaryEntry> DiaryEntries { get; set; }
+
 }

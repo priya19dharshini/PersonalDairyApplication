@@ -20,4 +20,8 @@ public interface IDiaryEntryService
         int diaryEntryId,
         UpdateDiaryEntryRequest request,
         CancellationToken cancellationToken);
+
+    Task<bool> DeleteAsync(
+    int diaryEntryId,
+    CancellationToken cancellationToken);
 }

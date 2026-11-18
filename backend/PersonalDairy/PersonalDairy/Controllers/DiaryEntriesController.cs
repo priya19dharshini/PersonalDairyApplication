@@ -84,4 +84,26 @@ public class DiaryEntriesController : ControllerBase
 
         return Ok(response);
     }
+
+
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> Delete(
+        int id,
+        CancellationToken cancellationToken)
+    {
+        var isDeleted = await _diaryEntryService.DeleteAsync(
+            id,
+            cancellationToken);
+
+        if (!isDeleted)
+        {
+            return NotFound(new
+            {
+                message = "Diary entry not found."
+            });
+        }
+
+        return NoContent();
+    }
+
 }

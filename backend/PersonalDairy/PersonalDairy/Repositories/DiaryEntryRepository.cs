@@ -59,4 +59,31 @@ public class DiaryEntryRepository : IDiaryEntryRepository
 
         await _context.SaveChangesAsync(cancellationToken);
     }
+
+
+    public async Task<bool> DeleteAsync(
+        int diaryEntryId,
+        CancellationToken cancellationToken)
+    {
+        // 1. Find the existing diary entry
+        var diaryEntry = await _context.DiaryEntries
+            .FirstOrDefaultAsync(
+                x => x.DiaryEntryId == diaryEntryId,
+                cancellationToken);
+
+        // 2. Check whether the entry exists
+        if (diaryEntry == null)
+        {
+            return false;
+        }
+
+        // 3. Mark the entity for deletion
+        _context.DiaryEntries.Remove(diaryEntry);
+
+        // 4. Save changes into SQL Server
+        await _context.SaveChangesAsync(cancellationToken);
+
+        return true;
+    }
+
 }
